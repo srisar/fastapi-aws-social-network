@@ -1,9 +1,11 @@
-from pprint import pprint
-
 from fastapi import FastAPI
-from app.core.config import settings
+from app.api.v1.router import router as v1_router
+from app.db.tables.users import create_users_table
 
 app = FastAPI(title="FastAPI Social Network")
 
 
-pprint(settings.json())
+app.include_router(router=v1_router, prefix="/v1")
+
+
+create_users_table()
